@@ -8,8 +8,8 @@ class RouteHandler extends Component {
     render() {
         return (
             <div>
-                <Route path="/" component={Login}/>
-                <Route path="/user-dashboard" component={UserDashboard}/>
+                <Route path="/" exact component={Login}/>
+                <Route path="/user-dashboard" exact component={UserDashboard}/>
             </div>
         )
     }

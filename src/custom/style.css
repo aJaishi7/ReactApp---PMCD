@@ -16,6 +16,13 @@ body {
     padding-top: 20px;
 }
 
+.nav-tabs {
+    margin-top: 5%;
+    width: 100%;
+    border: 1px solid whitesmoke;
+    padding: 10px;
+
+}
 
 .main {
     padding: 0px 10px;

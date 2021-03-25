@@ -1,10 +1,20 @@
-import {Button, Col, Container, Form, FormGroup, Input, Label, Row} from "reactstrap";
 import {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 
 class Login extends Component {
 
+    state = {redirect: ''};
+
+    redirectTo = () => {
+        this.setState({redirect: '/user-dashboard'});
+    }
+
     render() {
+
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect}/>
+        }
+
 
         return (
 
@@ -38,7 +48,9 @@ class Login extends Component {
                                     </div>
 
                                     <div className="col-sm-2 custom-col">
-                                        <button type="submit" className="btn btn-info form-control">Login</button>
+                                        <button type="submit"
+                                               onClick={this.redirectTo} className="btn btn-info form-control">Login</button>
+
                                     </div>
                                 </div>
                             </form>
