@@ -1,4 +1,5 @@
 import {Component} from "react";
+import ReactRoundedImage from "react-rounded-image";
 
 
 class UserDashboard extends Component {
@@ -8,12 +9,24 @@ class UserDashboard extends Component {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-12 ">
+                            <nav className="navbar navbar-dark bg-dark">
+
+                            </nav>
                             <div className="card">
                                 <div className="card-body">
+
                                     <h5 className="card-title">Welcome Arjun Jaishi</h5>
                                     {/*<p className="card-text">Some example text. Some example text.</p>*/}
-                                    {/*<a href="#" className="card-link">Card link</a>*/}
                                     {/*<a href="#" className="card-link">Another link</a>*/}
+                                    {/*<div style={{display: "flex"}}>*/}
+
+                                    {/*    <ReactRoundedImage*/}
+                                    {/*        image={MyPhoto}*/}
+                                    {/*        roundedSize="0"*/}
+                                    {/*        imageWidth="110"*/}
+                                    {/*        imageHeight="110"/>*/}
+                                    {/*</div>*/}
+
 
                                     <ul className="nav nav-tabs justify-content-center">
                                         <li className="nav-item">
@@ -31,7 +44,6 @@ class UserDashboard extends Component {
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
