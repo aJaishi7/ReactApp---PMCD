@@ -1,5 +1,7 @@
 import {Component} from 'react';
 import {Redirect} from 'react-router-dom';
+import { SocialIcon } from 'react-social-icons';
+
 
 class Login extends Component {
 
@@ -24,6 +26,14 @@ class Login extends Component {
                         <h2>Welcome to PMCD</h2>
                         <p>Precautions & Medicine For Common Diseases</p>
                         <p>A No. 1 App Providing <br/> disease related information.</p>
+                        <br/>
+                        <p>Find us on</p>
+                        <p>
+                            {<SocialIcon url={'https://twitter.com/jaketrent'} style={{height:"30px", width:'30px', marginRight:'2px'}}/>  }
+                            {<SocialIcon url={'https://facebook.com/jaketrent'} style={{height:"30px", width:'30px' , marginRight:'2px'}}/> }
+                            {<SocialIcon url={'https://instagram.com/jaketrent'} style={{height:"30px", width:'30px' , marginRight:'2px'}}/> }
+                        </p>
+
 
                     </div>
                 </div>
@@ -100,9 +110,6 @@ class Login extends Component {
                     style={{zIndex: "auto", backgroundColor: 'black'}}>
                     <li className="nav-item">
                         <a className="nav-link active text-white" href="/about">AboutUs</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link text-white" href="/contact">Contact Us</a>
                     </li>
                 </ul>
             </div>
