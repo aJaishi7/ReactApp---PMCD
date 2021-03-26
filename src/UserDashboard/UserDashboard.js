@@ -1,6 +1,7 @@
 import {Component} from "react";
-import DashboardHeader from '../DashboardHeader/DashboardHeader';
-import DashboardBody from "../DashboardBody/DashboardBody";
+import DashboardHeader from './DashboardHeader/DashboardHeader';
+import DashboardBody from "./DashboardBody/DashboardBody";
+import Search from "./Search/Search";
 
 
 class UserDashboard extends Component {
@@ -11,7 +12,8 @@ class UserDashboard extends Component {
                     <div className="row">
                         <div className="col-sm-12 ">
                             <DashboardHeader></DashboardHeader>
-                            <DashboardBody></DashboardBody>
+                            <DashboardBody> </DashboardBody>
+
                         </div>
                     </div>
                 </div>

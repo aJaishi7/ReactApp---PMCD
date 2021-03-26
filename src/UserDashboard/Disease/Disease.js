@@ -5,6 +5,7 @@ class Disease extends Component {
         return (
             <div>
                 <h1>This is Disease page</h1>
+
             </div>
         );
     }

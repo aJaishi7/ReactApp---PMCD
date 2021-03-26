@@ -1,11 +1,11 @@
 import {Component} from 'react';
 import {Route} from 'react-router-dom';
-import Login from "../Login/Login";
+import Login from "../LoginComponents/Login";
 import UserDashboard from "../UserDashboard/UserDashboard";
 import AboutUs from "../About/AboutUs";
-import Disease from "../Disease/Disease";
-import Doctor from "../Doctor/Doctor";
-import Hospital from "../Hospitals/Hospital";
+import Disease from "../UserDashboard/Disease/Disease";
+import Doctor from "../UserDashboard/Doctor/Doctor";
+import Hospital from "../UserDashboard/Hospitals/Hospital";
 
 class RouteHandler extends Component {
     render() {
@@ -17,8 +17,6 @@ class RouteHandler extends Component {
                 <Route path="/disease" exact component={Disease}/>
                 <Route path="/doctor" exact component={Doctor}/>
                 <Route path="/hospital" exact component={Hospital}/>
-
-
             </div>
         )
     }

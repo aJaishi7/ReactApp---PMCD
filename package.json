@@ -13,6 +13,7 @@
     "glyphicons": "^0.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-phone-number-input": "^3.1.18",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "reactstrap": "^8.9.0",
