@@ -15,8 +15,8 @@ class RouteHandler extends Component {
                 <Route path="/user-dashboard" exact component={UserDashboard}/>
                 <Route path="/about" exact component={AboutUs}/>
                 <Route path="/disease" exact component={Disease}/>
-                <Route path="/doctors" exact component={Doctor}/>
-                <Route path="/hospitals" exact component={Hospital}/>
+                <Route path="/doctor" exact component={Doctor}/>
+                <Route path="/hospital" exact component={Hospital}/>
 
 
             </div>

@@ -122,7 +122,30 @@
 }
 
 
+.custom-search i {
+    position: absolute;
+}
 
+.custom-search {
+    width: 100%;
+    margin-bottom: 10px;
+}
 
+.icn {
+    padding: 10px;
+    min-width: 40px;
+    margin: 0;
+
+    float: right;
+
+}
+
+.custom-frmControl {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: small;
+}
 
 
