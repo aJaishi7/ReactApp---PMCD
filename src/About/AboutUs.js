@@ -1,5 +1,4 @@
 import {Component} from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import pict from '../pic.png';
 
 class AboutUs extends Component {
@@ -33,7 +32,7 @@ class AboutUs extends Component {
                                     <div className="feature-box">
                                         <div className="clearfix">
                                             <div className="iconset">
-                                                <span><FontAwesomeIcon icon='cog'/></span>
+
                                             </div>
                                             <div className="feature-content">
                                                 <h4>Doctors & Specialist from Different Area</h4>
@@ -46,7 +45,7 @@ class AboutUs extends Component {
                                     <div className="feature-box">
                                         <div className="clearfix">
                                             <div className="iconset">
-                                                <span><FontAwesomeIcon icon='cog'/></span>
+
                                             </div>
                                             <div className="feature-content">
                                                 <h4>Latest Information about Diseases</h4>
@@ -58,7 +57,7 @@ class AboutUs extends Component {
                                     <div className="feature-box">
                                         <div className="clearfix">
                                             <div className="iconset">
-                                                <span><FontAwesomeIcon icon='cog'/></span>
+
                                             </div>
                                             <div className="feature-content">
                                                 <h4>Find Hospital Near You</h4>
@@ -76,7 +75,7 @@ class AboutUs extends Component {
                 <ul className="nav justify-content-end fixed-bottom bg-secondary "
                     style={{zIndex: "auto", backgroundColor: 'black'}}>
                     <li className="nav-item">
-                        <a className="nav-link active text-white" href="/">Login</a>
+                        <a className="nav-link active text-white" href="/"> <i className='fa fa-sign-in'/> Login</a>
                     </li>
                 </ul>
 

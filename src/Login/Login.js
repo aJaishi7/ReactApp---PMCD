@@ -58,7 +58,7 @@ class Login extends Component {
 
                                     <div className="col-sm-2 custom-col">
                                         <button type="submit"
-                                                onClick={this.redirectTo} className="btn btn-info form-control">Login
+                                                onClick={this.redirectTo} className="btn btn-info form-control fa fa-sign-in">
                                         </button>
 
                                     </div>
@@ -108,7 +108,7 @@ class Login extends Component {
                 <ul className="nav justify-content-end fixed-bottom bg-secondary "
                     style={{zIndex: "auto", backgroundColor: 'black'}}>
                     <li className="nav-item">
-                        <a className="nav-link active text-white" href="/about">AboutUs</a>
+                        <a className="nav-link active text-white" href="/about"><i className='fa fa-info-circle'/></a>
                     </li>
                 </ul>
             </div>
