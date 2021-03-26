@@ -75,7 +75,8 @@ class AboutUs extends Component {
                 <ul className="nav justify-content-end fixed-bottom bg-secondary "
                     style={{zIndex: "auto", backgroundColor: 'black'}}>
                     <li className="nav-item">
-                        <a className="nav-link active text-white" href="/"> <i className='fa fa-sign-in'/> Login</a>
+                        <a className="nav-link active text-white" href="/"> Go to Login Page <i
+                            className='fa fa-sign-in'/></a>
                     </li>
                 </ul>
 
