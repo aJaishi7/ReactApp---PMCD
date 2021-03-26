@@ -34,7 +34,6 @@ class Login extends Component {
                             {<SocialIcon url={'https://instagram.com/jaketrent'} style={{height:"30px", width:'30px' , marginRight:'2px'}}/> }
                         </p>
 
-
                     </div>
                 </div>
 
