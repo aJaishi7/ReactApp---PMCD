@@ -1,9 +1,12 @@
 import {Component} from 'react';
-class Doctor extends Component{
+
+class Doctor extends Component {
     render() {
         return (
             <div>
-                <h1>This is Doctor Page</h1>
+                <div className="alert alert-info" style={{marginLeft: '40px', marginRight: '40px', marginTop: '2px'}}>
+                    <strong>Doctors</strong>
+                </div>
             </div>
         );
     }

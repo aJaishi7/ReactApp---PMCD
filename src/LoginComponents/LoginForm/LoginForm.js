@@ -25,6 +25,7 @@ class LoginForm extends Component {
                                     <div className="col-sm-4 custom-col">
                                         <div className="form-group">
                                             <input type="text" className="form-control"
+                                                   required
                                                    placeholder="Enter Username"/>
                                         </div>
                                     </div>
@@ -32,6 +33,7 @@ class LoginForm extends Component {
                                     <div className="col-sm-4 custom-col">
                                         <div className="form-group">
                                             <input type="password" className="form-control"
+                                                   required
                                                    placeholder="Enter Password"/>
                                         </div>
                                     </div>

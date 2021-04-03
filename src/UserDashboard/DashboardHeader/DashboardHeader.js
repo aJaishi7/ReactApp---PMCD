@@ -2,7 +2,6 @@ import {Component} from "react";
 import myPic from "../../pic.png";
 
 
-
 class DashboardHeader extends Component {
     render() {
         return (
@@ -14,7 +13,7 @@ class DashboardHeader extends Component {
                     </a>
 
                     <li className="nav-item">
-                        <a className="nav-link small text-white" style={{marginTop: '5px'}} href="#">Arjun
+                        <a className="nav-link small text-white" style={{marginTop: '5px'}} href="/user-profile">Arjun
                             Jaishi</a>
                     </li>
                     <li className="nav-item">

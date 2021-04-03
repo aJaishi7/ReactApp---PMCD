@@ -6,6 +6,7 @@ import AboutUs from "../About/AboutUs";
 import Disease from "../UserDashboard/Disease/Disease";
 import Doctor from "../UserDashboard/Doctor/Doctor";
 import Hospital from "../UserDashboard/Hospitals/Hospital";
+import UserProfile from "../UserProfile/UserProfile";
 
 class RouteHandler extends Component {
     render() {
@@ -17,6 +18,7 @@ class RouteHandler extends Component {
                 <Route path="/disease" exact component={Disease}/>
                 <Route path="/doctor" exact component={Doctor}/>
                 <Route path="/hospital" exact component={Hospital}/>
+                <Route path="/user-profile" exact component={UserProfile}/>
             </div>
         )
     }

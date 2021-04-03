@@ -13,7 +13,6 @@ class UserDashboard extends Component {
                         <div className="col-sm-12 ">
                             <DashboardHeader></DashboardHeader>
                             <DashboardBody> </DashboardBody>
-
                         </div>
                     </div>
                 </div>
