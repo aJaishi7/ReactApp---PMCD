@@ -17,7 +17,8 @@ class UpdateDoctorProfile extends Component {
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}>
                                         <a href="" className='badge badge-dark'>Disease</a>
                                     </p>
-                                    <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard">Go to <i className='fa fa-dashboard'> Dashboard</i></a></p>
+                                    <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard">Go
+                                        to <i className='fa fa-dashboard'> Dashboard</i></a></p>
 
                                 </div>
                                 <div className='card-body alert-info'>
@@ -62,9 +63,9 @@ class UpdateDoctorProfile extends Component {
                                         </div>
                                     </div>
                                     <div className="row">
-                                       <div className="col-sm-1">
-                                           <button className='btn btn-success'>Update</button>
-                                       </div>
+                                        <div className="col-sm-1">
+                                            <button className='btn btn-success'>Update</button>
+                                        </div>
                                     </div>
                                 </div>
 
