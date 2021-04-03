@@ -19,12 +19,8 @@ class DashboardBody extends Component {
                                 <a className="nav-link" href="/hospital" target='iframe_a'
                                    data-toggle="tab">Hospital</a>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="news" target='iframe_a' data-toggle="tab">News</a>
-                            </li>
                         </ul>
-
-
+                        
                         <div className='feature-box custom-search'>
                             <div className='form-group h5' style={{margin: '10px'}}>
                                 <i className='fa fa-search icn'/>
