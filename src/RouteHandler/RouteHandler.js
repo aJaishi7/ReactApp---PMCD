@@ -12,6 +12,7 @@ import UpdateDoctorProfile from "../DoctorProfile/UpdateDoctorProfile";
 import UpdateUserProfile from "../UserProfile/UpdateUserProfile";
 import DiseaseList from "../Disease/DiseaseList";
 import AddDisease from "../Disease/AddDisease";
+import UpdateDisease from "../Disease/UpdateDisease";
 
 class RouteHandler extends Component {
     render() {
@@ -29,6 +30,7 @@ class RouteHandler extends Component {
                 <Route path="/update-user" exact component={UpdateUserProfile}/>
                 <Route path="/disease-list" exact component={DiseaseList}/>
                 <Route path="/add-disease" exact component={AddDisease}/>
+                <Route path="/update-disease" exact component={UpdateDisease}/>
             </div>
         )
     }

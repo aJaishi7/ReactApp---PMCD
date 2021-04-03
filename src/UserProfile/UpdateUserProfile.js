@@ -1,5 +1,6 @@
 import {Component} from "react";
 import myPic from "../pic.png";
+import '../Style/text-custom.css';
 
 class UpdateUserProfile extends Component {
     render() {
@@ -17,35 +18,35 @@ class UpdateUserProfile extends Component {
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard">Go
                                         to <i className='fa fa-dashboard'> Dashboard</i></a></p>
                                 </div>
-                                
+
                                 <div className='card-body alert-info'>
 
                                     <div className="row">
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control' value='username'/>
+                                            <input type="text" className='form-control text-custom' value='username'/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control' value='email'/>
+                                            <input type="text" className='form-control text-custom' value='email'/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control' value='phone'/>
+                                            <input type="text" className='form-control text-custom' value='phone'/>
                                         </div>
 
                                     </div>
 
                                     <div className="row">
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control' value='address'/>
+                                            <input type="text" className='form-control text-custom' value='address'/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control' value='gender'/>
+                                            <input type="text" className='form-control text-custom' value='gender'/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control' value='dateOfBirth'/>
+                                            <input type="text" className='form-control text-custom' value='dateOfBirth'/>
                                         </div>
                                     </div>
                                     <hr/>

@@ -1,5 +1,7 @@
 import {Component} from "react";
+
 import '../Style/custom-disease.css';
+import '../Style/text-custom.css';
 
 class DiseaseList extends Component {
     render() {
@@ -16,9 +18,12 @@ class DiseaseList extends Component {
                                         <div className="row small">
                                             <div className="col-sm-12">
                                                 <ul style={{listStyle: "none"}}>
-                                                    <li><a href="/add-disease">Add Disease</a><br/>
-                                                        <a href="/user-dashboard"> Go to
-                                                            Dashboard </a></li>
+                                                    <li><a href="/add-disease" className='text-custom'>Add
+                                                        Disease</a><br/>
+                                                        <p style={{fontSize: '12px', textDecoration: 'bold'}}><a
+                                                            href="/user-dashboard">Go
+                                                            to <i className='fa fa-dashboard'> Dashboard</i></a></p>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -27,8 +32,9 @@ class DiseaseList extends Component {
                                             <div className="col-sm-12">
                                                 <ul style={{listStyle: 'none', color: 'black'}}>
                                                     <li className='border small custom-disease'>
-                                                        <a href="" className='text-black-50'>Cancer</a>
+                                                        <a href="/update-disease" className='text-black-50'>Cancer </a>
                                                     </li>
+
                                                 </ul>
                                             </div>
                                         </div>
