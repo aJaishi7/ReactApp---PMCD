@@ -17,7 +17,7 @@ class DoctorProfile extends Component {
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}>
                                         <a href="/update-doctor" className='badge badge-dark'
                                            style={{marginRight: '5px'}}>Update </a>
-                                        <a href="" className='badge badge-dark'>Disease</a>
+                                        <a href="/disease-list" className='badge badge-dark'>Disease</a>
                                     </p>
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard">Go
                                         to <i className='fa fa-dashboard'> Dashboard</i></a></p>

@@ -16,8 +16,8 @@ class UpdateUserProfile extends Component {
                                     <p style={{marginTop: '2px'}}>Arjun Jaishi </p>
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard">Go
                                         to <i className='fa fa-dashboard'> Dashboard</i></a></p>
-
                                 </div>
+                                
                                 <div className='card-body alert-info'>
 
                                     <div className="row">
