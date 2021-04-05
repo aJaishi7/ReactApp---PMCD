@@ -1,22 +1,91 @@
 import {Component} from "react";
 import 'react-phone-number-input/style.css';
-import PhoneInput from "react-phone-number-input";
+import '../../Style/text-custom.css';
+import axios from "axios";
+import {Alert} from "reactstrap";
+
 
 class Register extends Component {
 
+    state = {
+        fullName: '',
+        username: '',
+        phone: '',
+        password: '',
+        visible: false,
 
-    //Show Hide Password
-    togglePassword = () => {
-        let x = document.getElementById("pw");
-        let y = document.getElementById("rpw");
-        if (x.type === "password" || y.type === "password") {
-            x.type = "text";
-            y.type = "text";
-        } else {
-            x.type = "password";
-            y.type = "password";
+
+        fullnameError: '',
+        usernameError: '',
+        phoneError: '',
+        passwordError: '',
+
+    };
+
+    validation = () => {
+        let fullnameError = '';
+        let usernameError = '';
+        let phoneError = '';
+        let passwordError = '';
+
+        if (!this.state.fullName) {
+            fullnameError = 'Required';
+        } else if (!this.state.username) {
+            usernameError = 'Required';
+        } else if (!this.state.phone) {
+            phoneError = 'Required';
+        } else if (!this.state.password) {
+            passwordError = 'Required';
         }
+        if (fullnameError || usernameError || phoneError || passwordError) {
+            this.setState({
+                fullnameError,
+                usernameError,
+                phoneError,
+                passwordError
+            });
+            return false;
+        }
+        return true;
+    };
+
+
+    inputHandler = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    };
+
+    toggle = () => {
+        this.setState({
+            visible: !this.state.visible
+        });
     }
+
+    registerHandler = (event) => {
+        event.preventDefault();
+
+        let isValid = this.validation();
+        if (isValid) {
+            axios.post('http://localhost:3000/api/register', this.state)
+                .then((response) => {
+                    if (response.data.success == true) {
+                        console.log(response);
+                        this.setState({
+                            fullName: '',
+                            username: '',
+                            phone: '',
+                            password: '',
+                            visible: true,
+                        });
+                    }
+                })
+                .catch((err) => {
+                    console.log("Register Error: ", err);
+                });
+        }
+
+    };
 
     //matchPassword
     matchPassword = () => {
@@ -36,92 +105,96 @@ class Register extends Component {
 
     }
 
-    validateFields = () => {
-        let btn = document.getElementById("btn");
-        let fullname = document.getElementById('fullname').value;
-        let username = document.getElementById('username').value;
-        let phone = document.getElementById('phone').value;
-        if (fullname === "") {
-            btn.disabled = true;
-        } else if (username === "") {
-            btn.disabled = true;
-        } else if (phone === "") {
-            btn.disabled = true;
-        } else {
-            btn.disabled = false;
-        }
-
-    }
-
 
     render() {
-
-
         return (
             <div>
                 <div className="main">
-
                     <div className="col-md-9 col-sm-12">
                         <div className="register-form" id="register-form">
                             <p>Please fill up details to connect with us !</p>
-                            <form>
-
+                            <form className='form card jumbotron '>
+                                {
+                                    this.state.visible ?
+                                        <Alert color='primary' toggle={this.toggle.bind(this)}
+                                               isOpen={this.state.visible}>User
+                                            Registered</Alert> : <Alert color='danger' toggle={this.toggle.bind(this)}
+                                                                        isOpen={this.state.visible}>Error! User Not
+                                            Registered</Alert>
+                                }
                                 <div className="form-group">
                                     <input
                                         id='fullname'
                                         type="text"
-                                        onKeyUp={this.validateFields}
-                                        className="form-control"
+                                        className="form-control text-custom"
                                         placeholder="Enter Fullname"
-                                        name='fullname'
+                                        name='fullName'
+                                        onChange={this.inputHandler}
+                                        value={this.state.fullName}
                                         required/>
+                                    <span className='small' id='usernameError' style={{
+                                        color: "red",
+                                        float: "left"
+                                    }}>{this.state.fullnameError}</span>
                                 </div>
                                 <div className="form-group">
                                     <input
                                         id='username'
                                         type="text"
-                                        onKeyUp={this.validateFields}
-                                        className="form-control"
+                                        className="form-control text-custom"
                                         placeholder="Enter Username"
                                         name='username'
+                                        onChange={this.inputHandler}
+                                        value={this.state.username}
                                         required/>
+                                    <span className='small' id='usernameError' style={{
+                                        color: "red",
+                                        float: "left"
+                                    }}>{this.state.usernameError}</span>
                                 </div>
                                 <div className="form-group">
                                     <input type="text"
                                            id='phone'
-                                           onKeyUp={this.validateFields}
-                                           className="form-control"
+                                           className="form-control text-custom"
                                            placeholder="Enter Phone No."
                                            name='phone'
+                                           onChange={this.inputHandler}
+                                           value={this.state.phone}
                                            required/>
+                                    <span className='small' id='usernameError' style={{
+                                        color: "red",
+                                        float: "left"
+                                    }}>{this.state.phoneError}</span>
                                 </div>
 
-                                <div className="form-group" style={{position: 'relative', display: 'flex'}}>
+                                <div className="form-group" >
                                     <input
                                         type='password'
-                                        className="form-control"
+                                        className="form-control text-custom"
                                         placeholder="Enter Password"
                                         name='password'
                                         onKeyUp={this.matchPassword}
                                         id='pw'
+                                        onChange={this.inputHandler}
+                                        value={this.state.password}
                                         required/>
-                                    <i className='fa fa-eye'
-                                       onClick={this.togglePassword}
-                                       style={{position: "absolute", right: '1%', top: '25%'}}/>
+                                    <span className='small' id='usernameError' style={{
+                                        color: "red",
+                                        float: "left"
+                                    }}>{this.state.passwordError}</span>
                                 </div>
 
                                 <div className="form-group" style={{position: 'relative', display: 'flex'}}>
                                     <input
                                         type="password"
-                                        className="form-control"
+                                        className="form-control text-custom"
                                         placeholder="Re-enter Password"
                                         name='rpassword'
                                         id='rpw'
                                         onKeyUp={this.matchPassword}
+                                        onChange={this.inputHandler}
                                         required/>
-                                    <i className='fa fa-eye'
-                                       onClick={this.togglePassword}
-                                       style={{position: "absolute", right: '1%', top: '25%'}}/>
+
                                     <label style={{
                                         top: '10%',
                                         position: 'absolute',
@@ -144,9 +217,8 @@ class Register extends Component {
                                     type="submit"
                                     id='btn'
                                     title='Click to register'
-                                    className="btn btn-info form-control"
-                                    disabled
-                                    onClick={this.matchPassword}>
+                                    className="btn btn-info form-control small"
+                                    onClick={this.registerHandler}>
                                     Register
                                 </button>
 
