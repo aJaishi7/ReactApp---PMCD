@@ -3,6 +3,8 @@ import myPic from "../pic.png";
 import '../Style/text-custom.css';
 import axios from "axios";
 import {Link, Redirect} from "react-router-dom";
+import DatePicker from "react-datepicker";
+
 
 class UserProfile extends Component {
 
@@ -12,11 +14,13 @@ class UserProfile extends Component {
         isEdit: false,
         config: {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-        }
+        },
 
     }
 
+
     componentDidMount() {
+
         const config = {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
         }
@@ -27,15 +31,15 @@ class UserProfile extends Component {
                     user: response.data.data
                 });
             }).catch((err) => console.log(err.response));
+
     }
+
 
     actionDelete = (event) => {
         event.preventDefault();
-
         const config = {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
         }
-
         axios.delete(`http://localhost:3000/api/removeMe`, config)
             .then((response) => {
                 console.log(response.data)
@@ -45,10 +49,31 @@ class UserProfile extends Component {
             }).catch((err) => console.log(err.response));
     }
 
+    actionUpdate = (event) => {
+        event.preventDefault();
+        const config = {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }
+        axios.put(`http://localhost:3000/api/updateMe`, this.state.user, config)
+            .then((response) => {
+                if (response.data.success == true) {
+                    alert("User Updated");
+                }
+            }).catch((err) => console.log(err.response));
+    }
+
+    inputHandler = (e) => {
+        this.setState({
+            user: {...this.state.user, [e.target.name]: e.target.value}
+        });
+    };
+
+
     render() {
         if (this.state.isDeleted) {
             return <Redirect to='/'/>
         }
+
 
         return (
             <div>
@@ -62,12 +87,6 @@ class UserProfile extends Component {
                                     <img src={myPic} alt="User Picture" style={{width: '100px', borderRadius: '50px'}}/>
                                     <p style={{marginTop: '2px'}}>{this.state.user.fullName} </p>
                                     <p style={{marginTop: '2px'}} className='small'>{this.state.user.usertype} </p>
-                                    <p style={{fontSize: '12px', textDecoration: 'bold'}}>
-                                        <Link to={{
-                                            pathname: '/update-user/'
-                                        }} className='badge badge-dark' style={{marginRight: '5px'}}>Update
-                                        </Link>
-                                    </p>
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard/">Go
                                         to <i className='fa fa-dashboard'> Dashboard</i></a></p>
 
@@ -78,19 +97,26 @@ class UserProfile extends Component {
                                         <div className='form-group col-sm-4'>
                                             <label htmlFor="" style={{float: "left"}} className='small'>Username</label>
                                             <input type="text" className='form-control text-custom'
-                                                   value={this.state.user.username}/>
+                                                   value={this.state.user.username}
+                                                   onChange={this.inputHandler}
+                                                   name='username'
+                                            />
                                         </div>
 
                                         <div className='form-group col-sm-4'>
                                             <label htmlFor="" style={{float: "left"}} className='small'>Email</label>
                                             <input type="text" className='form-control text-custom'
-                                                   value={this.state.user.email}/>
+                                                   value={this.state.user.email}
+                                                   name='email'
+                                                   onChange={this.inputHandler}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
                                             <label htmlFor="" style={{float: "left"}} className='small'>Phone</label>
                                             <input type="text" className='form-control text-custom'
-                                                   value={this.state.user.phone}/>
+                                                   value={this.state.user.phone}
+                                                   name='phone'
+                                                   onChange={this.inputHandler}/>
                                         </div>
 
                                     </div>
@@ -99,24 +125,54 @@ class UserProfile extends Component {
                                         <div className='form-group col-sm-4'>
                                             <label htmlFor="" style={{float: "left"}} className='small'>Address</label>
                                             <input type="text" className='form-control text-custom'
-                                                   value={this.state.user.address}/>
+                                                   value={this.state.user.address}
+                                                   name='address'
+                                                   onChange={this.inputHandler}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
                                             <label htmlFor="" style={{float: "left"}} className='small'>Gender</label>
                                             <input type="text" className='form-control text-custom'
-                                                   value={this.state.user.gender}/>
+                                                   value={this.state.user.gender}
+                                                   name='gender'
+                                                   onChange={this.inputHandler}/>
                                         </div>
 
-                                        <div className='form-group col-sm-4'>
+                                        <div className='form-group col-sm-2'>
                                             <label htmlFor="" style={{float: "left"}} className='small'>Date of
                                                 Birth</label>
                                             <input type="text" className='form-control text-custom'
                                                    placeholder='Date of Birth'
-                                                   value={this.state.user.dateOfBirth}/>
+                                                   value={new Date(this.state.user.dateOfBirth).toDateString()}
+                                                   min="1980-01-01" max="2021-12-31"
+                                                   name='dateOfBirth'
+                                                   onChange={this.inputHandler}/>
+
                                         </div>
+
+                                        <div className='form-group col-sm-2'>
+                                            <label htmlFor="" style={{float: "left"}} className='small'> Update Date of
+                                                Birth</label>
+                                            <input type="date" className='form-control text-custom'
+                                                   placeholder='Date of Birth'
+                                                   min="1980-01-01" max="2021-12-31"
+                                                   name='dateOfBirth'
+                                                   onChange={this.inputHandler}/>
+
+                                        </div>
+
                                     </div>
                                     <hr/>
+
+                                    <p style={{fontSize: '12px', textDecoration: 'bold', float: 'left'}}>
+                                        <button className='badge badge-dark' style={{marginRight: '5px'}}
+                                                onClick={(event => {
+                                                    this.actionUpdate(event)
+                                                })}
+                                        >Update
+                                        </button>
+                                    </p>
+
                                     <div className="row small" style={{float: 'right'}}>
                                         <div className="col-sm-12 small">
                                             <button style={{
