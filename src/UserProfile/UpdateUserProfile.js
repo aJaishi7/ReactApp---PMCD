@@ -3,7 +3,10 @@ import myPic from "../pic.png";
 import '../Style/text-custom.css';
 
 class UpdateUserProfile extends Component {
+
+
     render() {
+    const {data} = this.props;
         return (
             <div>
                 <div className="container" style={{marginTop: '5px'}}>
@@ -14,7 +17,12 @@ class UpdateUserProfile extends Component {
                                 <div className='card-header alert-info'>
 
                                     <img src={myPic} alt="User Picture" style={{width: '100px', borderRadius: '50px'}}/>
-                                    <p style={{marginTop: '2px'}}>Arjun Jaishi </p>
+                                    <p style={{marginTop: '2px'}}><input type="text" name='fullName' style={{
+                                        borderRadius: '2px',
+                                        border: '1px blue'
+                                    }} placeholder='Your Name'
+                                                                         value={data}
+                                                                         className='small text-center'/></p>
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard">Go
                                         to <i className='fa fa-dashboard'> Dashboard</i></a></p>
                                 </div>
@@ -23,41 +31,49 @@ class UpdateUserProfile extends Component {
 
                                     <div className="row">
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='username'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Username</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   placeholder='username'/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='email'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Email</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   placeholder='email'/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='phone'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Phone</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   placeholder='phone'/>
                                         </div>
 
                                     </div>
 
                                     <div className="row">
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='address'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Address</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   placeholder='address'/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='gender'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Gender</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   placeholder='gender'/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='dateOfBirth'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Date of
+                                                Birth</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   placeholder='dateOfBirth'/>
                                         </div>
                                     </div>
                                     <hr/>
-                                    <div className="row small" style={{float: 'right'}}>
+                                    <div className="row small">
                                         <div className="col-sm-12 small">
-                                            <button style={{
-                                                border: '1px',
-                                                borderRadius: '5px',
-                                                backgroundColor: "lightslategrey",
-                                                color: "white"
-                                            }}>Delete Profile
+                                            <button className='btn btn-success btn-sm'>Update Profile
                                             </button>
                                         </div>
                                     </div>

@@ -2,11 +2,12 @@ import {Component} from "react";
 import myPic from "../pic.png";
 import '../Style/text-custom.css';
 import axios from "axios";
+import {Link, Redirect} from "react-router-dom";
 
 class UserProfile extends Component {
 
     state = {
-        user: {},
+        user: [],
         isDeleted: false,
         isEdit: false,
         config: {
@@ -19,7 +20,7 @@ class UserProfile extends Component {
         const config = {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
         }
-        axios.get(`http://localhost:3000/api/findMe`, config)
+        axios.get(`http://localhost:3000/api/findMe/`, config)
             .then((response) => {
                 console.log(response);
                 this.setState({
@@ -28,7 +29,27 @@ class UserProfile extends Component {
             }).catch((err) => console.log(err.response));
     }
 
+    actionDelete = (event) => {
+        event.preventDefault();
+
+        const config = {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }
+
+        axios.delete(`http://localhost:3000/api/removeMe`, config)
+            .then((response) => {
+                console.log(response.data)
+                this.setState({
+                    isDeleted: true
+                })
+            }).catch((err) => console.log(err.response));
+    }
+
     render() {
+        if (this.state.isDeleted) {
+            return <Redirect to='/'/>
+        }
+
         return (
             <div>
                 <div className="container" style={{marginTop: '5px'}}>
@@ -42,9 +63,12 @@ class UserProfile extends Component {
                                     <p style={{marginTop: '2px'}}>{this.state.user.fullName} </p>
                                     <p style={{marginTop: '2px'}} className='small'>{this.state.user.usertype} </p>
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}>
-                                        <a href="/update-user" className='badge badge-dark'
-                                           style={{marginRight: '5px'}}>Update </a></p>
-                                    <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard">Go
+                                        <Link to={{
+                                            pathname: '/update-user/'
+                                        }} className='badge badge-dark' style={{marginRight: '5px'}}>Update
+                                        </Link>
+                                    </p>
+                                    <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard/">Go
                                         to <i className='fa fa-dashboard'> Dashboard</i></a></p>
 
                                 </div>
@@ -52,19 +76,19 @@ class UserProfile extends Component {
 
                                     <div className="row">
                                         <div className='form-group col-sm-4'>
-                                            <label htmlFor="" style={{float:"left"}} className='small'>Username</label>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Username</label>
                                             <input type="text" className='form-control text-custom'
                                                    value={this.state.user.username}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <label htmlFor="" style={{float:"left"}} className='small'>Email</label>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Email</label>
                                             <input type="text" className='form-control text-custom'
                                                    value={this.state.user.email}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <label htmlFor="" style={{float:"left"}} className='small'>Phone</label>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Phone</label>
                                             <input type="text" className='form-control text-custom'
                                                    value={this.state.user.phone}/>
                                         </div>
@@ -73,19 +97,20 @@ class UserProfile extends Component {
 
                                     <div className="row">
                                         <div className='form-group col-sm-4'>
-                                            <label htmlFor="" style={{float:"left"}} className='small'>Address</label>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Address</label>
                                             <input type="text" className='form-control text-custom'
                                                    value={this.state.user.address}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <label htmlFor="" style={{float:"left"}} className='small'>Gender</label>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Gender</label>
                                             <input type="text" className='form-control text-custom'
                                                    value={this.state.user.gender}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <label htmlFor="" style={{float:"left"}} className='small'>Date of Birth</label>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Date of
+                                                Birth</label>
                                             <input type="text" className='form-control text-custom'
                                                    placeholder='Date of Birth'
                                                    value={this.state.user.dateOfBirth}/>
@@ -99,7 +124,13 @@ class UserProfile extends Component {
                                                 borderRadius: '5px',
                                                 backgroundColor: "lightslategrey",
                                                 color: "white"
-                                            }}>Delete Profile
+                                            }}
+                                                    type='submit'
+                                                    onClick={(event => {
+                                                        if (window.confirm("Are you sure?"))
+                                                            this.actionDelete(event)
+                                                    })}
+                                            >Delete Profile
                                             </button>
                                         </div>
                                     </div>
