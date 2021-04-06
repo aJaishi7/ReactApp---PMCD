@@ -12,6 +12,7 @@ class DashboardHeader extends Component {
         }
 
     }
+
     componentDidMount() {
         const config = {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
@@ -25,6 +26,12 @@ class DashboardHeader extends Component {
             }).catch((err) => console.log(err.response));
     }
 
+    logout=(event)=>{
+        event.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href='/';
+    }
+
 
     render() {
         return (
@@ -36,12 +43,13 @@ class DashboardHeader extends Component {
                     </a>
 
                     <li className="nav-item">
-                        <a className="nav-link small text-white" style={{marginTop: '5px'}} href="/user-profile">{this.state.user.fullName}</a>
+                        <a className="nav-link small text-white" style={{marginTop: '5px'}}
+                           href="/user-profile">{this.state.user.fullName}</a>
                     </li>
                     <li className="nav-item">
-                        <a href="/logout" className="nav-link small text-white" style={{marginTop: '5px'}}>
+                        <button className="btn btn-dark" style={{marginTop: '5px'}} onClick={this.logout}>
                             <i className='fa fa-sign-out'></i>
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </div>
