@@ -1,8 +1,33 @@
 import {Component} from "react";
 import myPic from "../pic.png";
 import '../Style/text-custom.css';
+import axios from "axios";
 
 class UserProfile extends Component {
+
+    state = {
+        user: {},
+        isDeleted: false,
+        isEdit: false,
+        config: {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }
+
+    }
+
+    componentDidMount() {
+        const config = {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }
+        axios.get(`http://localhost:3000/api/findMe`, config)
+            .then((response) => {
+                console.log(response);
+                this.setState({
+                    user: response.data.data
+                });
+            }).catch((err) => console.log(err.response));
+    }
+
     render() {
         return (
             <div>
@@ -14,7 +39,8 @@ class UserProfile extends Component {
                                 <div className='card-header alert-info'>
 
                                     <img src={myPic} alt="User Picture" style={{width: '100px', borderRadius: '50px'}}/>
-                                    <p style={{marginTop: '2px'}}>Arjun Jaishi </p>
+                                    <p style={{marginTop: '2px'}}>{this.state.user.fullName} </p>
+                                    <p style={{marginTop: '2px'}} className='small'>{this.state.user.usertype} </p>
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}>
                                         <a href="/update-user" className='badge badge-dark'
                                            style={{marginRight: '5px'}}>Update </a></p>
@@ -26,30 +52,43 @@ class UserProfile extends Component {
 
                                     <div className="row">
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='username'/>
+                                            <label htmlFor="" style={{float:"left"}} className='small'>Username</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   value={this.state.user.username}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='email'/>
+                                            <label htmlFor="" style={{float:"left"}} className='small'>Email</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   value={this.state.user.email}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='phone'/>
+                                            <label htmlFor="" style={{float:"left"}} className='small'>Phone</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   value={this.state.user.phone}/>
                                         </div>
 
                                     </div>
 
                                     <div className="row">
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='address'/>
+                                            <label htmlFor="" style={{float:"left"}} className='small'>Address</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   value={this.state.user.address}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='gender'/>
+                                            <label htmlFor="" style={{float:"left"}} className='small'>Gender</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   value={this.state.user.gender}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='dateOfBirth'/>
+                                            <label htmlFor="" style={{float:"left"}} className='small'>Date of Birth</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   placeholder='Date of Birth'
+                                                   value={this.state.user.dateOfBirth}/>
                                         </div>
                                     </div>
                                     <hr/>
