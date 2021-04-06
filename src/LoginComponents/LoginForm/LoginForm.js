@@ -11,11 +11,12 @@ class LoginForm extends Component {
         password: '',
         isLoggedIn: false,
         config: {
-            headers: {'authorization': `Bearer ${localStorage.getItem('token')}`}
+            headers: {'Authorization': "Bearer "+ localStorage.getItem('token')}
         },
         visible: false,
         usernameError: '',
-        passwordError: ''
+        passwordError: '',
+
     }
 
     validation = () => {
@@ -64,7 +65,7 @@ class LoginForm extends Component {
                 .then((response) => {
                     if (response.data.success == true) {
                         console.log(response.data.data);
-                        localStorage.setItem('token', response.data.data.token);
+                      localStorage.setItem('token', response.data.token);
                         this.setState({
                             username: '',
                             password: '',
