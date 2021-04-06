@@ -30,27 +30,34 @@ class Doctor extends Component {
             return (
                 <div>
                     <div className="alert alert-info"
-                         style={{marginLeft: '40px', marginRight: '40px', marginTop: '2px'}}>
+                         style={{marginTop: '2px'}}>
                         <strong>Doctors</strong>
                     </div>
 
-                    <div className='container-fluid'>
+                    <div className='container'>
                         <div className="row justify-content-center">
-                            <div className="col-auto">
-                                <table className=' small table-responsive' style={{fontSize: '14px'}}>
-                                    {this.state.doctor.map((doctor) => {
+                            <div className="col-sm-12">
 
-                                        const Doctors = <tr>
+                                {
+                                    this.state.doctor.map((doctor) => {
+                                        const Doctor = <a href="" className='small'>
+                                            <div className="row border tab-content custom-disease">
+                                                <div className="col-sm-12">
+                                                    <ul style={{
+                                                        listStyle: 'none',
+                                                        color: 'black',
+                                                        marginTop: '10px'
+                                                    }}>
+                                                        <li>
+                                                            {doctor.fullName}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </a>
 
-                                            <td><a href="/doctor-details"
-                                                   className='text-center badge badge-info'> {doctor.fullName}</a>
-                                            </td>
-
-                                        </tr>
-                                        return Doctors;
+                                        return Doctor;
                                     })}
-
-                                </table>
                             </div>
                         </div>
                     </div>

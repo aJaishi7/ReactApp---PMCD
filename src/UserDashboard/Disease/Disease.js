@@ -30,25 +30,36 @@ class Disease extends Component {
             return (
                 <div>
                     <div className="alert alert-info"
-                         style={{marginLeft: '40px', marginRight: '40px', marginTop: '2px'}}>
+                         style={{marginTop: '2px'}}>
                         <strong>Diseases</strong>
                     </div>
 
 
-                    <div className='container-fluid'>
+                    <div className='container'>
                         <div className="row justify-content-center">
-                            <div className="col-auto">
-                                <table className=' small table-responsive' style={{fontSize: '14px'}}>
-                                    {this.state.disease.map((disease) => {
-                                        const Disease = <tr>
-                                            <td><a href="/disease-details"
-                                                   className='text-center badge badge-info'> {disease.diseaseName}</a>
-                                            </td>
-                                        </tr>
+                            <div className="col-sm-12">
+
+                                {
+                                    this.state.disease.map((disease) => {
+                                        const Disease = <a href="" className='small'>
+                                            <div className="row border tab-content custom-disease">
+                                                <div className="col-sm-12">
+                                                    <ul style={{
+                                                        listStyle: 'none',
+                                                        color: 'black',
+                                                        marginTop: '10px'
+                                                    }}>
+                                                        <li>
+                                                            {disease.diseaseName}
+
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </a>
+
                                         return Disease;
                                     })}
-
-                                </table>
                             </div>
                         </div>
                     </div>

@@ -11,11 +11,12 @@ class LoginForm extends Component {
         password: '',
         isLoggedIn: false,
         config: {
-            headers: {'Authorization': "Bearer "+ localStorage.getItem('token')}
+            headers: {'Authorization': "Bearer " + localStorage.getItem('token')}
         },
         visible: false,
         usernameError: '',
         passwordError: '',
+        usertype: ''
 
     }
 
@@ -65,11 +66,13 @@ class LoginForm extends Component {
                 .then((response) => {
                     if (response.data.success == true) {
                         console.log(response.data.data);
-                      localStorage.setItem('token', response.data.token);
+                        localStorage.setItem('token', response.data.token);
+                        localStorage.setItem('usertype', response.data.data.usertype);
                         this.setState({
                             username: '',
                             password: '',
-                            isLoggedIn: true
+                            isLoggedIn: true,
+                            usertype: response.data.data.usertype
                         });
                     } else {
                         this.setState({visible: true});
@@ -82,7 +85,9 @@ class LoginForm extends Component {
 
 
     render() {
-        if (this.state.isLoggedIn) {
+        if (this.state.usertype === 'Doctor') {
+            return <Redirect to='/doctor-profile'/>
+        } else if (this.state.usertype !== 'Doctor' && this.state.isLoggedIn) {
             return <Redirect to='/user-dashboard'/>
         }
         return (

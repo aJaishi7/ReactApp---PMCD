@@ -26,8 +26,8 @@ class RouteHandler extends Component {
                 <Route path="/hospital" exact component={Hospital}/>
                 <Route path="/user-profile" exact component={UserProfile}/>
                 <Route path="/doctor-profile" exact component={DoctorProfile}/>
-                <Route path="/update-doctor" exact component={UpdateDoctorProfile}/>
-                <Route path="/update-user" exact component={UpdateUserProfile}/>
+                {/*<Route path="/update-doctor" exact component={UpdateDoctorProfile}/>*/}
+                {/*<Route path="/update-user" exact component={UpdateUserProfile}/>*/}
                 <Route path="/disease-list" exact component={DiseaseList}/>
                 <Route path="/add-disease" exact component={AddDisease}/>
                 <Route path="/update-disease" exact component={UpdateDisease}/>

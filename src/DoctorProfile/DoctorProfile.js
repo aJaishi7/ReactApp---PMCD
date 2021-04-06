@@ -1,9 +1,78 @@
 import {Component} from "react";
 import myPic from "../pic.png";
 import '../Style/text-custom.css';
+import axios from "axios";
+import {Redirect} from "react-router-dom";
 
 class DoctorProfile extends Component {
+
+    state = {
+        user: [],
+        isDeleted: false,
+        isEdit: false,
+        config: {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        },
+
+    }
+
+
+    componentDidMount() {
+
+        const config = {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }
+        axios.get(`http://localhost:3000/api/findMe/`, config)
+            .then((response) => {
+                console.log(response);
+                this.setState({
+                    user: response.data.data
+                });
+            }).catch((err) => console.log(err.response));
+
+    }
+
+
+    actionDelete = (event) => {
+        event.preventDefault();
+        const config = {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }
+        axios.delete(`http://localhost:3000/api/removeMe`, config)
+            .then((response) => {
+                console.log(response.data)
+                this.setState({
+                    isDeleted: true
+                })
+            }).catch((err) => console.log(err.response));
+    }
+
+    actionUpdate = (event) => {
+        event.preventDefault();
+        const config = {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }
+        axios.put(`http://localhost:3000/api/updateMe`, this.state.user, config)
+            .then((response) => {
+                if (response.data.success == true) {
+                    alert("User Updated");
+                }
+            }).catch((err) => console.log(err.response));
+    }
+
+    inputHandler = (e) => {
+        this.setState({
+            user: {...this.state.user, [e.target.name]: e.target.value}
+        });
+    };
+
+
     render() {
+        if (this.state.isDeleted) {
+            return <Redirect to='/'/>
+        }
+
+
         return (
             <div>
                 <div className="container" style={{marginTop: '5px'}}>
@@ -14,13 +83,12 @@ class DoctorProfile extends Component {
                                 <div className='card-header alert-info'>
 
                                     <img src={myPic} alt="User Picture" style={{width: '100px', borderRadius: '50px'}}/>
-                                    <p style={{marginTop: '2px'}}>Arjun Jaishi - Doctor </p>
+                                    <p style={{marginTop: '2px'}}>{this.state.user.fullName} <br/> <strong
+                                        className='small'>{this.state.user.usertype}</strong></p>
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}>
-                                        <a href="/update-doctor" className='badge badge-dark'
-                                           style={{marginRight: '5px'}}>Update </a>
                                         <a href="/disease-list" className='badge badge-dark'>Disease</a>
                                     </p>
-                                    <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard">Go
+                                    <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard/">Go
                                         to <i className='fa fa-dashboard'> Dashboard</i></a></p>
 
                                 </div>
@@ -28,44 +96,84 @@ class DoctorProfile extends Component {
 
                                     <div className="row">
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='username'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Username</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   value={this.state.user.username}
+                                                   onChange={this.inputHandler}
+                                                   name='username'
+                                            />
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='email'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Email</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   value={this.state.user.email}
+                                                   name='email'
+                                                   onChange={this.inputHandler}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='phone'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Phone</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   value={this.state.user.phone}
+                                                   name='phone'
+                                                   onChange={this.inputHandler}/>
                                         </div>
 
                                     </div>
 
                                     <div className="row">
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='address'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Address</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   value={this.state.user.address}
+                                                   name='address'
+                                                   onChange={this.inputHandler}/>
                                         </div>
 
                                         <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='gender'/>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Gender</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   value={this.state.user.gender}
+                                                   name='gender'
+                                                   onChange={this.inputHandler}/>
                                         </div>
 
-                                        <div className='form-group col-sm-4'>
-                                            <input type="text" className='form-control text-custom' value='dateOfBirth'/>
+                                        <div className='form-group col-sm-2'>
+                                            <label htmlFor="" style={{float: "left"}} className='small'>Date of
+                                                Birth</label>
+                                            <input type="text" className='form-control text-custom'
+                                                   placeholder='Date of Birth'
+                                                   value={new Date(this.state.user.dateOfBirth).toDateString()}
+                                                   min="1980-01-01" max="2021-12-31"
+                                                   name='dateOfBirth'
+                                                   onChange={this.inputHandler}/>
+
                                         </div>
 
-                                    </div>
+                                        <div className='form-group col-sm-2'>
+                                            <label htmlFor="" style={{float: "left"}} className='small'> Update Date of
+                                                Birth</label>
+                                            <input type="date" className='form-control text-custom'
+                                                   placeholder='Date of Birth'
+                                                   min="1980-01-01" max="2021-12-31"
+                                                   name='dateOfBirth'
+                                                   onChange={this.inputHandler}/>
 
-                                    <div className="row">
-                                        <div className='form-group col-sm-6'>
-                                            <textarea className='form-control text-custom' value='Experience' rows='5'/>
                                         </div>
 
-                                        <div className='form-group col-sm-6'>
-                                            <textarea className='form-control text-custom' value='Specialist At' rows='5'/>
-                                        </div>
                                     </div>
                                     <hr/>
+
+                                    <p style={{fontSize: '12px', textDecoration: 'bold', float: 'left'}}>
+                                        <button className='badge badge-dark' style={{marginRight: '5px'}}
+                                                onClick={(event => {
+                                                    this.actionUpdate(event)
+                                                })}
+                                        >Update
+                                        </button>
+                                    </p>
+
                                     <div className="row small" style={{float: 'right'}}>
                                         <div className="col-sm-12 small">
                                             <button style={{
@@ -73,7 +181,13 @@ class DoctorProfile extends Component {
                                                 borderRadius: '5px',
                                                 backgroundColor: "lightslategrey",
                                                 color: "white"
-                                            }}>Delete Profile
+                                            }}
+                                                    type='submit'
+                                                    onClick={(event => {
+                                                        if (window.confirm("Are you sure?"))
+                                                            this.actionDelete(event)
+                                                    })}
+                                            >Delete Profile
                                             </button>
                                         </div>
                                     </div>

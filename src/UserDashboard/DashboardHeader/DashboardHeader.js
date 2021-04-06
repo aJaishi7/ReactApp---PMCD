@@ -26,14 +26,23 @@ class DashboardHeader extends Component {
             }).catch((err) => console.log(err.response));
     }
 
-    logout=(event)=>{
+    logout = (event) => {
         event.preventDefault();
         localStorage.removeItem('token');
-        window.location.href='/';
+        window.location.href = '/';
     }
 
 
     render() {
+        let href = ''
+        {
+            if (this.state.user.usertype == "Doctor") {
+                href = '/doctor-profile';
+            } else if (this.state.user.usertype == "User") {
+                href = '/user-profile';
+            }
+        }
+
         return (
             <div>
                 <ul className="nav bg-dark justify-content-end">
@@ -44,7 +53,7 @@ class DashboardHeader extends Component {
 
                     <li className="nav-item">
                         <a className="nav-link small text-white" style={{marginTop: '5px'}}
-                           href="/user-profile">{this.state.user.fullName}</a>
+                           href={href} id='user-profile'>{this.state.user.fullName}</a>
                     </li>
                     <li className="nav-item">
                         <button className="btn btn-dark" style={{marginTop: '5px'}} onClick={this.logout}>
