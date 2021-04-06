@@ -39,10 +39,13 @@ class Doctor extends Component {
                             <div className="col-auto">
                                 <table className=' small table-responsive' style={{fontSize: '14px'}}>
                                     {this.state.doctor.map((doctor) => {
+
                                         const Doctors = <tr>
+
                                             <td><a href="/doctor-details"
                                                    className='text-center badge badge-info'> {doctor.fullName}</a>
                                             </td>
+
                                         </tr>
                                         return Doctors;
                                     })}
