@@ -68,6 +68,7 @@ class LoginForm extends Component {
                         console.log(response.data.data);
                         localStorage.setItem('token', response.data.token);
                         localStorage.setItem('usertype', response.data.data.usertype);
+                        localStorage.setItem('id',response.data.data._id);
                         this.setState({
                             username: '',
                             password: '',

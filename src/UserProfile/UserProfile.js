@@ -24,7 +24,8 @@ class UserProfile extends Component {
         const config = {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
         }
-        axios.get(`http://localhost:3000/api/findMe/`, config)
+        const id = localStorage.getItem("id");
+        axios.get(`http://localhost:3000/api/findMe/${id}`, config)
             .then((response) => {
                 console.log(response);
                 this.setState({
@@ -35,8 +36,7 @@ class UserProfile extends Component {
     }
 
 
-    actionDelete = (event) => {
-        event.preventDefault();
+    actionDelete = (e) => {
         const config = {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
         }
@@ -49,8 +49,8 @@ class UserProfile extends Component {
             }).catch((err) => console.log(err.response));
     }
 
-    actionUpdate = (event) => {
-        event.preventDefault();
+    actionUpdate = (e) => {
+        e.preventDefault();
         const config = {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
         }
@@ -58,6 +58,7 @@ class UserProfile extends Component {
             .then((response) => {
                 if (response.data.success == true) {
                     alert("User Updated");
+                    window.location.reload();
                 }
             }).catch((err) => console.log(err.response));
     }
@@ -84,7 +85,7 @@ class UserProfile extends Component {
                             <div className='card'>
                                 <div className='card-header alert-info'>
 
-                                    <img src={myPic} alt="User Picture" style={{width: '100px', borderRadius: '50px'}}/>
+                                    <img src={`http://localhost:3000/${this.state.user.photo}`} alt="User Picture" style={{width: '100px', borderRadius: '20%'}}/>
                                     <p style={{marginTop: '2px'}}>{this.state.user.fullName} </p>
                                     <p style={{marginTop: '2px'}} className='small'>{this.state.user.usertype} </p>
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard/">Go

@@ -23,11 +23,11 @@ class DashboardBody extends Component {
                         
                         <div className='feature-box custom-search'>
                             <div className='form-group h5' style={{margin: '10px'}}>
-                                <i className='fa fa-search icn'/>
-                                <input type="text" name='txtSearch' className=' custom-frmControl'
-                                       placeholder='Search'/>
+                                {/*<i className='fa fa-search icn'/>*/}
+                                {/*<input type="text" name='txtSearch' className=' custom-frmControl'*/}
+                                {/*       placeholder='Search'/>*/}
 
-                                <iframe name="iframe_a" src={'/disease'} height="300px" width="100%"
+                                <iframe name="iframe_a" src={'/disease'} height="500px" width="100%"
                                         title="Iframe Example"
                                         className='border'>
                                 </iframe>

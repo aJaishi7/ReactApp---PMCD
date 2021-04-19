@@ -76,6 +76,7 @@ class Register extends Component {
                             username: '',
                             phone: '',
                             password: '',
+                            photo:'',
                             visible: true,
                         });
                     }

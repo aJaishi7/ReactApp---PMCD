@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 class Doctor extends Component {
 
@@ -40,7 +41,7 @@ class Doctor extends Component {
 
                                 {
                                     this.state.doctor.map((doctor) => {
-                                        const Doctor = <a href="" className='small'>
+                                        const Doctor = <Link to={{pathname:'doctor-details',state:doctor}} className='small'>
                                             <div className="row border tab-content custom-disease">
                                                 <div className="col-sm-12">
                                                     <ul style={{
@@ -54,7 +55,7 @@ class Doctor extends Component {
                                                     </ul>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </Link>
 
                                         return Doctor;
                                     })}

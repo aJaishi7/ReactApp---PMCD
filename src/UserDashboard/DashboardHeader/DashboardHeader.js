@@ -17,7 +17,8 @@ class DashboardHeader extends Component {
         const config = {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
         }
-        axios.get(`http://localhost:3000/api/findMe`, config)
+        const id = localStorage.getItem("id");
+        axios.get(`http://localhost:3000/api/findMe/${id}`, config)
             .then((response) => {
                 console.log(response);
                 this.setState({
@@ -43,16 +44,26 @@ class DashboardHeader extends Component {
             }
         }
 
+
         return (
             <div>
                 <ul className="nav bg-dark justify-content-end">
                     <a href="#">
-                        <img src={myPic} alt="Profile Pic"
-                             style={{width: '50px', borderRadius: '60px'}}/>
+                        {}
+                        <img src={`http://localhost:3000/${this.state.user.photo}`} alt="Profile Pic" id='img-profile'
+                             style={{
+                                 width: '50px',
+                                 height: '50px',
+                                 borderRadius: '25%',
+                                 marginTop: '1px',
+                                 overflow: "hidden",
+                                 display: 'inline-block',
+                                 position: 'relative'
+                             }}/>
                     </a>
 
                     <li className="nav-item">
-                        <a className="nav-link small text-white" style={{marginTop: '5px'}}
+                        <a className="nav-link small text-white" style={{marginTop: '7px'}}
                            href={href} id='user-profile'>{this.state.user.fullName}</a>
                     </li>
                     <li className="nav-item">

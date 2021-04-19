@@ -15,6 +15,7 @@ class AddDisease extends Component {
         preventiveMeasures: '',
         medicines: '',
         eatables: '',
+        userId:localStorage.getItem('id'),
 
         visible: false,
 
@@ -87,12 +88,13 @@ class AddDisease extends Component {
     addDisease = (event) => {
         event.preventDefault();
         const isValid = this.validation();
+        const id = localStorage.getItem("id");
         if (isValid) {
             axios.post('http://localhost:3000/api/addDisease', this.state, this.state.config)
                 .then((response) => {
                     console.log(response)
-                    if (response.data.success=='true') {
-                        alert('Disease Added');
+                    if (response.data.success==true) {
+                        window.location.href='/disease-list';
                         this.setState({
                             diseaseName: '',
                             diseaseType: '',

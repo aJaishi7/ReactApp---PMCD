@@ -5,26 +5,59 @@ import axios from "axios";
 
 class UpdateDisease extends Component {
 
+
     state = {
-        isDeleted: false,
+        diseaseName: '',
+        diseaseType: '',
+        description: '',
+        mildCauses: '',
+        severeCauses: '',
+        preventiveMeasures: '',
+        medicines: '',
+        eatables: '',
+        disease: {},
+
         config: {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
         },
-        disease: []
     }
 
-    update=()=>{
-        const {state} = this.props.location;
+    inputHandler = (e) => {
         this.setState({
-            disease:state
+            disease: {...this.state.disease, [e.target.name]: e.target.value}
+        });
+    };
+
+    componentDidMount() {
+
+        const {id} = this.props.match.params;
+        axios.get(`http://localhost:3000/api/findOneDiseaseById/${id}`, this.state.config).then((response) => {
+            // console.log(response.data);
+            this.setState({
+                disease: response.data.data
+            })
         })
     }
 
-
+    handleUpdate = (e) => {
+        e.preventDefault();
+        const config = {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }
+        const diseaseId = this.state.disease._id;
+        axios.put(`http://localhost:3000/api/updateDisease/${diseaseId}`, this.state.disease, config)
+            .then((response) => {
+                if (response.data.success == true) {
+                    window.location.href = '/disease-list'
+                    console.log("DiseaseID" + response.data);
+                    alert("Disease Information Updated");
+                } else {
+                    alert("Error Deleting Disease");
+                }
+            })
+    }
 
     render() {
-    const disease = this.state.disease;
-
         return (
             <div>
                 <div className="container">
@@ -51,10 +84,12 @@ class UpdateDisease extends Component {
                                                         <div className="col-sm-6">
                                                             <div className="form-group">
                                                                 <label htmlFor="" style={{float: "left"}}
-                                                                       className='small'>Disease Name</label>
+                                                                       className='small font-weight-bold'>Disease
+                                                                    Name</label>
                                                                 <input type="text" name='diseaseName'
                                                                        className='form-control text-custom'
-                                                                       value={disease.diseaseName}
+                                                                       value={this.state.disease.diseaseName}
+                                                                       onChange={this.inputHandler}
                                                                        placeholder='Disease Name'/>
                                                             </div>
                                                         </div>
@@ -62,10 +97,12 @@ class UpdateDisease extends Component {
                                                         <div className="col-sm-6">
                                                             <div className="form-group">
                                                                 <label htmlFor="" style={{float: "left"}}
-                                                                       className='small'>Disease Type</label>
+                                                                       className='small font-weight-bold'>Disease
+                                                                    Type</label>
                                                                 <input type="text" name='diseaseType'
                                                                        className='form-control text-custom'
-                                                                       value={disease.diseaseType}
+                                                                       value={this.state.disease.diseaseType}
+                                                                       onChange={this.inputHandler}
                                                                        placeholder='Disease Type'/>
                                                             </div>
                                                         </div>
@@ -75,11 +112,12 @@ class UpdateDisease extends Component {
                                                         <div className="col-sm-12">
                                                             <div className="form-group">
                                                                 <label htmlFor="" style={{float: "left"}}
-                                                                       className='small'>Description</label>
+                                                                       className='small font-weight-bold'>Description</label>
                                                                 <textarea name='description'
                                                                           className='form-control text-custom'
                                                                           placeholder='Description'
-                                                                          // value={disease.description}
+                                                                          onChange={this.inputHandler}
+                                                                          value={this.state.disease.description}
                                                                           rows='5'/>
                                                             </div>
                                                         </div>
@@ -89,11 +127,13 @@ class UpdateDisease extends Component {
                                                         <div className="col-sm-6">
                                                             <div className="form-group">
                                                                 <label htmlFor="" style={{float: "left"}}
-                                                                       className='small'>Mild Causes</label>
+                                                                       className='small font-weight-bold'>Mild
+                                                                    Causes</label>
                                                                 <textarea name='mildCauses'
                                                                           className='form-control text-custom'
                                                                           placeholder='Mild Causes'
-                                                                          // value={disease.mildCauses}
+                                                                          onChange={this.inputHandler}
+                                                                          value={this.state.disease.mildCauses}
                                                                           rows='5'/>
                                                             </div>
                                                         </div>
@@ -101,11 +141,13 @@ class UpdateDisease extends Component {
                                                         <div className="col-sm-6">
                                                             <div className="form-group">
                                                                 <label htmlFor="" style={{float: "left"}}
-                                                                       className='small'>Severe Causes</label>
+                                                                       className='small font-weight-bold'>Severe
+                                                                    Causes</label>
                                                                 <textarea name='severeCauses'
                                                                           className='form-control text-custom'
                                                                           placeholder='Severe Causes'
-                                                                          // value={disease.severeCauses}
+                                                                          onChange={this.inputHandler}
+                                                                          value={this.state.disease.severeCauses}
                                                                           rows='5'/>
                                                             </div>
                                                         </div>
@@ -115,11 +157,13 @@ class UpdateDisease extends Component {
                                                         <div className="col-sm-12">
                                                             <div className="form-group">
                                                                 <label htmlFor="" style={{float: "left"}}
-                                                                       className='small'>Preventive Measures</label>
+                                                                       className='small font-weight-bold'>Preventive
+                                                                    Measures</label>
                                                                 <textarea name='preventiveMeasures'
                                                                           className='form-control text-custom'
                                                                           placeholder='Preventive Measures'
-                                                                          // value={disease.preventiveMeasures}
+                                                                          onChange={this.inputHandler}
+                                                                          value={this.state.disease.preventiveMeasures}
                                                                           rows='5'/>
                                                             </div>
                                                         </div>
@@ -129,11 +173,12 @@ class UpdateDisease extends Component {
                                                         <div className="col-sm-12">
                                                             <div className="form-group">
                                                                 <label htmlFor="" style={{float: "left"}}
-                                                                       className='small'>Medicines</label>
+                                                                       className='small font-weight-bold'>Medicines</label>
                                                                 <textarea name='medicines'
                                                                           className='form-control text-custom'
                                                                           placeholder='Medicines'
-                                                                          // value={disease.medicines}
+                                                                          onChange={this.inputHandler}
+                                                                          value={this.state.disease.medicines}
                                                                           rows='5'/>
                                                             </div>
                                                         </div>
@@ -143,12 +188,14 @@ class UpdateDisease extends Component {
                                                         <div className="col-sm-12">
                                                             <div className="form-group">
                                                                 <label htmlFor="" style={{float: "left"}}
-                                                                       className='small'>Edible things during disease
+                                                                       className='small font-weight-bold'>Edible things
+                                                                    during disease
                                                                     period</label>
                                                                 <textarea name='eatables'
                                                                           className='form-control text-custom'
                                                                           placeholder='Eatables'
-                                                                          // value={disease.eatables}
+                                                                          value={this.state.disease.eatables}
+                                                                          onChange={this.inputHandler}
                                                                           rows='5'/>
                                                             </div>
                                                         </div>
@@ -160,6 +207,7 @@ class UpdateDisease extends Component {
                                                                 <div className="row">
                                                                     <div className="col-sm-6">
                                                                         <button className='btn btn-success btn-sm'
+                                                                                onClick={this.handleUpdate}
                                                                                 style={{float: "left"}}>Update
                                                                             Disease
                                                                         </button>
