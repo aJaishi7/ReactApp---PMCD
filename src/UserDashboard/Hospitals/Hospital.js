@@ -10,6 +10,8 @@ const mapStyles = {
 
 
 class Hospital extends Component {
+
+
     render() {
         return (
             <div>
