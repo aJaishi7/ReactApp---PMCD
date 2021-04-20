@@ -1,9 +1,11 @@
 import {Component} from "react";
 import myPic from "../pic.png";
 import '../Style/text-custom.css';
+import '../Style/RoundImage.css';
 import axios from "axios";
 import {Link, Redirect} from "react-router-dom";
 import DatePicker from "react-datepicker";
+import $ from 'jquery';
 
 
 class UserProfile extends Component {
@@ -21,6 +23,26 @@ class UserProfile extends Component {
 
     componentDidMount() {
 
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#imagePreview").css(
+                        "background-image",
+                        "url(" + e.target.result + ")"
+                    );
+                    $("#imagePreview").hide();
+                    $("#imagePreview").fadeIn(650);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imageUpload").change(function () {
+            readURL(this);
+        });
+
+
         const config = {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
         }
@@ -33,6 +55,12 @@ class UserProfile extends Component {
                 });
             }).catch((err) => console.log(err.response));
 
+    }
+
+    logout = (event) => {
+        event.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href = '/';
     }
 
 
@@ -70,6 +98,33 @@ class UserProfile extends Component {
     };
 
 
+
+    actionFileSelect = (e) => {
+        this.setState({
+            photo: e.target.files[0]
+        })
+    }
+
+    actionUploadProfilePic = (e) => {
+        e.preventDefault();
+        const config = {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }
+        const formData = new FormData();
+        formData.append('photo', this.state.photo);
+        axios.post(`http://localhost:3000/api/uploadProfileImage/${this.state.user._id}`, formData, config).then((response) => {
+            if (response.data.success == true) {
+                // console.log(response.data);
+                window.location.reload();
+                alert("Profile Image Uploaded");
+                this.setState({
+                    user: {...this.state.user, photo: response.data.filename}
+                })
+            }
+        })
+    }
+
+
     render() {
         if (this.state.isDeleted) {
             return <Redirect to='/'/>
@@ -85,11 +140,37 @@ class UserProfile extends Component {
                             <div className='card'>
                                 <div className='card-header alert-info'>
 
-                                    <img src={`http://localhost:3000/${this.state.user.photo}`} alt="User Picture" style={{width: '100px', borderRadius: '20%'}}/>
+                                    <div>
+                                        <div className="container prof1">
+                                            <div className="avatar-upload">
+                                                <div className="avatar-edit">
+                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
+                                                           onChange={this.actionFileSelect}
+                                                           name='fileUpload'/>
+                                                    <label htmlFor="imageUpload"></label>
+                                                </div>
+                                                <div className="avatar-preview">
+
+                                                    <div id='imagePreview'
+                                                         style={{backgroundImage: `url('http://localhost:3000/uploads/${this.state.user.photo}')`}}>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <button className='btn btn-sm border-secondary btn-success'
+                                                    onClick={this.actionUploadProfilePic}> Upload
+                                            </button>
+                                        </div>
+
+                                    </div>
+
                                     <p style={{marginTop: '2px'}}>{this.state.user.fullName} </p>
                                     <p style={{marginTop: '2px'}} className='small'>{this.state.user.usertype} </p>
                                     <p style={{fontSize: '12px', textDecoration: 'bold'}}><a href="/user-dashboard/">Go
                                         to <i className='fa fa-dashboard'> Dashboard</i></a></p>
+                                    <p style={{fontSize: '12px', textDecoration: 'bold'}}>
+                                        <button className='btn btn-sm border-secondary' onClick={this.logout}>Logout</button>
+                                    </p>
 
                                 </div>
                                 <div className='card-body alert-info'>

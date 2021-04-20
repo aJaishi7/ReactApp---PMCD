@@ -44,12 +44,11 @@ class DashboardHeader extends Component {
             }
         }
 
-
+    console.log(this.state.user.photo);
         return (
             <div>
                 <ul className="nav bg-dark justify-content-end">
                     <a href="#">
-                        {}
                         <img src={`http://localhost:3000/${this.state.user.photo}`} alt="Profile Pic" id='img-profile'
                              style={{
                                  width: '50px',

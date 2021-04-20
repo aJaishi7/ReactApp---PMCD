@@ -62,94 +62,97 @@ class DiseaseList extends Component {
         if (!isLoaded) {
             return <div>Please Wait! Loading Data ...</div>
         } else {
-        return (
-            <div>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="card">
-                                <div className="card-header alert-info">Diseases</div>
-                                <div className="card-body">
-                                    <div className="container">
+            return (
+                <div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="card">
+                                    <div className="card-header alert-info">Diseases</div>
+                                    <div className="card-body">
+                                        <div className="container">
 
-                                        <div className="row small">
-                                            <div className="col-sm-12">
-                                                <ul style={{listStyle: "none"}}>
-                                                    <li><a href="/add-disease"
-                                                           className='text-custom btn btn-secondary btn-sm'>Add
-                                                        Disease</a>
-                                                        <p style={{fontSize: '12px', textDecoration: 'bold'}}><a
-                                                            href="/user-dashboard">Go
-                                                            to <i className='fa fa-dashboard'> Dashboard</i></a></p>
-                                                    </li>
-                                                </ul>
+                                            <div className="row small">
+                                                <div className="col-sm-12">
+                                                    <ul style={{listStyle: "none"}}>
+                                                        <li>
+                                                            <a href="/add-disease"
+                                                               style={{float: "left", marginBottom: '5px'}}
+                                                               className='text-custom btn border-secondary btn-sm'>
+                                                                Disease <i className='fa fa-plus-circle'></i></a>
+                                                            <a style={{float: "right"}}
+                                                               href="/user-dashboard" className='text-custom btn border-secondary'>
+                                                                Dashboard <i className='fa fa-dashboard'></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
 
 
-                                        {
-                                            this.state.disease.map((disease) => {
-                                                    const Disease = <div>
+                                            {
+                                                this.state.disease.map((disease) => {
+                                                        const Disease = <div>
 
-                                                        <div className="row border tab-content">
-                                                            <div className="col-sm-12 custom-disease">
-                                                                <button style={{
-                                                                    float: "right",
-                                                                    marginTop: '10px',
-                                                                    borderRadius: '20px'
-                                                                }} className='btn btn-sm'
-                                                                        onClick={(event) => {
-                                                                            if (window.confirm(`Are you sure want to delete ${disease.diseaseName} ?`))
-                                                                                this.handleDelete(disease._id)
-                                                                            window.location.reload();
-                                                                        }}>
-                                                                    <i
-                                                                        className='fa fa-trash small'></i></button>
+                                                            <div className="row border tab-content">
+                                                                <div className="col-sm-12 custom-disease">
+                                                                    <button style={{
+                                                                        float: "right",
+                                                                        marginTop: '10px',
+                                                                        borderRadius: '20px'
+                                                                    }} className='btn btn-sm'
+                                                                            onClick={(event) => {
+                                                                                if (window.confirm(`Are you sure want to delete ${disease.diseaseName} ?`))
+                                                                                    this.handleDelete(disease._id)
+                                                                                window.location.reload();
+                                                                            }}>
+                                                                        <i
+                                                                            className='fa fa-trash small'></i></button>
 
-                                                                <Link to={{
-                                                                    pathname: `update-disease/${disease._id}`
-                                                                }}
-
-                                                                      style={{
-                                                                          float: "right",
-                                                                          marginTop: '10px',
-                                                                          borderRadius: '20px'
-                                                                      }}
-                                                                      className='btn btn-sm'><i
-                                                                    className='fa fa-edit small'></i></Link>
-
-                                                                <ul style={{
-                                                                    listStyle: 'none',
-                                                                    color: 'black',
-                                                                    marginTop: '10px'
-                                                                }}>
                                                                     <Link to={{
                                                                         pathname: `update-disease/${disease._id}`
-                                                                    }} className='small'>
-                                                                        <li>
-                                                                            {disease.diseaseName}
-                                                                        </li>
-                                                                    </Link>
-                                                                </ul>
+                                                                    }}
 
+                                                                          style={{
+                                                                              float: "right",
+                                                                              marginTop: '10px',
+                                                                              borderRadius: '20px'
+                                                                          }}
+                                                                          className='btn btn-sm'><i
+                                                                        className='fa fa-edit small'></i></Link>
+
+                                                                    <ul style={{
+                                                                        listStyle: 'none',
+                                                                        color: 'black',
+                                                                        marginTop: '10px'
+                                                                    }}>
+                                                                        <Link to={{
+                                                                            pathname: `update-disease/${disease._id}`
+                                                                        }} className='small'>
+                                                                            <li>
+                                                                                {disease.diseaseName}
+                                                                            </li>
+                                                                        </Link>
+                                                                    </ul>
+
+                                                                </div>
                                                             </div>
+
                                                         </div>
 
-                                                    </div>
 
-
-                                                    return Disease;
-                                                }
-                                            )}
+                                                        return Disease;
+                                                    }
+                                                )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
-    }
+            );
+        }
 
     }
 }
